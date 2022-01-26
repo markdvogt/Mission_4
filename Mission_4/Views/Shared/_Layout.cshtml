@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Mission_4</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!--<link rel="stylesheet" href="~/css/site.css" /> -->
+    <link href="~/css/Styles.css" rel="stylesheet" />
+
+    <style>
+        nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: darkslategrey;
+            width: 275px;
+            border-radius: 10px;
+        }
+
+        a {
+            float: left;
+        }
+
+        a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+            a:hover {
+                background-color: #111;
+            }
+    </style>
+</head>
+<body>
+
+    <!--This is my shares navigation menu that will be on all pages on my site!-->
+    <nav>
+        <a asp-controller="Home" asp-action="Index">Home</a>
+        <a asp-controller="Home" asp-action="Podcast">Podcasts</a>
+        <a asp-controller="Home" asp-action="FillOutForm">Edit Form</a>
+    </nav>
+
+    <div>
+        @RenderBody()
+    </div>
+
+</body>
+</html>
