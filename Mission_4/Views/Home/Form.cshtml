@@ -1,7 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
     ViewData["Title"] = "Movie Form";
 }
 
@@ -12,8 +9,17 @@
 <div class="form-center">
     <form method="post">
         <fieldset style="border-radius: 10px;">
-            <label for="category" asp-for="Category">Category</label> <!--asp-for commands allow connection to my models-->
-            <input type="text" id="category" asp-for="Category"><br><br>
+
+            <div asp-validation-summary="All"></div> <!--Makes it so validation pops up-->
+
+            <label asp-for="CategoryId">Category</label><!--asp-for commands allow connection to my models-->
+            <select asp-for="CategoryId">
+                <option value="">Select a Movie Category</option>
+                @foreach (Category c in ViewBag.Categories) //make loop
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select><br /><br />
 
             <label for="title" asp-for="Title">Title</label>
             <input type="text" id="title" asp-for="Title"><br><br>
@@ -37,7 +43,7 @@
             <select id="edit" asp-for="Edit">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
-            </select><br><br> 
+            </select><br><br>
 
             <label for="lent" asp-for="Lent">Lent To</label>
             <input type="text" id="lent" asp-for="Lent"><br><br>
@@ -50,9 +56,7 @@
                 <input value="Submit" type="submit" id="calculate">
             </div>
 
-
         </fieldset>
     </form>
 
-    <div asp-validation-summary="All"></div> <!--Makes it so validation pops up-->
 </div>

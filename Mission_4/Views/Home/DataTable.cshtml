@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Movie Table";
+}
+
+<!--grabs a list of object type FormResponse so you can access the data-->
+@model List<FormResponse>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="font-weight-bold">
+            <tr>
+                <td>Category</td>
+                <td>Title</td>
+                <td>Year</td>
+                <td>Director</td>
+                <td>Rating</td>
+                <td>Edited</td>
+                <td>Lent To</td>
+                <td>Notes</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var x in Model) //This line gives me an error-->
+            {
+            <tr>
+                <td>@x.Category.CategoryName</td>
+                <td>@x.Title</td>
+                <td>@x.Year</td>
+                <td>@x.Director</td>
+                <td>@x.Rating</td>
+                <td>@x.Edit</td>
+                <td>@x.Lent</td>
+                <td>@x.Notes</td>
+                <!--Now the first time through the loop, the FormId will be 1 and then 2 and so on. Now the edit button on each row will be attached to a different FormId -->
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-formid="@x.FormId">Edit</a></td>
+                <!-- Now the delete button on each row will be attached to a different FormId -->
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-formid="@x.FormId">Delete</a></td>
+            </tr>
+            }
+        </tbody>
+
+    </table>

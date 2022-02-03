@@ -8,7 +8,7 @@ using Mission_4.Models;
 namespace Mission_4.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220126173405_Initial")]
+    [Migration("20220131170849_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,22 +17,87 @@ namespace Mission_4.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("Mission_4.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Thriller"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Sci-fi"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "Musical"
+                        },
+                        new
+                        {
+                            CategoryId = 9,
+                            CategoryName = "Fantasy"
+                        },
+                        new
+                        {
+                            CategoryId = 10,
+                            CategoryName = "Rom-Com"
+                        });
+                });
+
             modelBuilder.Entity("Mission_4.Models.FormResponse", b =>
                 {
                     b.Property<int>("FormId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Edit")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Edit")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Lent")
                         .HasColumnType("TEXT");
@@ -53,15 +118,16 @@ namespace Mission_4.Migrations
 
                     b.HasKey("FormId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             FormId = 1,
-                            Category = "Comedy",
+                            CategoryId = 1,
                             Director = "Jared Hess",
-                            Edit = false,
                             Rating = "PG",
                             Title = "Nacho Libre",
                             Year = 2006u
@@ -69,9 +135,8 @@ namespace Mission_4.Migrations
                         new
                         {
                             FormId = 2,
-                            Category = "Sci-fi/Adventure",
+                            CategoryId = 6,
                             Director = "Christopher Nolan",
-                            Edit = false,
                             Rating = "PG-13",
                             Title = "Interstellar",
                             Year = 2014u
@@ -79,9 +144,8 @@ namespace Mission_4.Migrations
                         new
                         {
                             FormId = 3,
-                            Category = "Action/Adventure",
+                            CategoryId = 2,
                             Director = "Jon Favreau",
-                            Edit = false,
                             Rating = "PG-13",
                             Title = "Iron Man",
                             Year = 2008u
@@ -89,9 +153,8 @@ namespace Mission_4.Migrations
                         new
                         {
                             FormId = 4,
-                            Category = "Musical/Romance",
+                            CategoryId = 8,
                             Director = "Bill Condon",
-                            Edit = false,
                             Rating = "PG",
                             Title = "Beauty and the Beast",
                             Year = 2017u
@@ -99,13 +162,21 @@ namespace Mission_4.Migrations
                         new
                         {
                             FormId = 5,
-                            Category = "Action/Adventure",
+                            CategoryId = 2,
                             Director = "Jon Watts",
-                            Edit = false,
                             Rating = "PG-13",
                             Title = "Spider-Man: No Way Home",
                             Year = 2021u
                         });
+                });
+
+            modelBuilder.Entity("Mission_4.Models.FormResponse", b =>
+                {
+                    b.HasOne("Mission_4.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
