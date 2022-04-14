@@ -27,8 +27,9 @@ namespace Mission_4
         {
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationContext>(options => {
-                options.UseSqlite(Configuration["ConnectionStrings:BlahConnection"]);
+                options.UseNpgsql(Configuration.GetConnectionString("BlahConnection"));
             }); 
+
 
         }
 
@@ -45,6 +46,7 @@ namespace Mission_4
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -58,6 +60,8 @@ namespace Mission_4
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }
